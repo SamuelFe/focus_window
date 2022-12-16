@@ -1,0 +1,21 @@
+#!/bin/env bash
+
+# getting current app id
+cur_x_offset=($(wmctrl -lG | grep $(xprop -root | grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | sed 's/^0x/0x0/') | tr -s ' ' | cut -d ' ' -f 3))
+
+# getting current desktop apps IDs
+cur_desktop=$(wmctrl -d | grep '*' | cut -d ' ' -f1)
+
+apps_ids=($(wmctrl -l | grep " ${cur_desktop} " | tr -s ' ' | cut -d ' ' -f 1))
+
+for id in ${apps_ids[@]}; do
+  _x=($(wmctrl -lG | grep $id | tr -s ' ' | cut -d ' ' -f 3)) 
+
+  if [ $_x -lt $cur_x_offset ]; then
+    x_offset=${_x}
+    cmd="wmctrl -i -a \"$id\""
+    eval $cmd
+    break
+  fi
+done
+
