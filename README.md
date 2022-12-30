@@ -6,11 +6,16 @@ I'm using Openbox Window Manager and it only has the option to bind some key to 
 
 I still want to use Openbox but I want be able to change focus the way Tiling Window Managers do (or the closest possivle).
 
-# Target usability
+# Usability
 `focus_window --left` change focus to window at left
 
 `focus_window --right` change focus to window at right
 
-`focus_window --up` change focus to window at up
+`focus_window --up` change focus to upper window
 
-`focus_window --down` change focus to window at down
+`focus_window --down` change focus to window below
+
+# Installation
+1. Put the script in yout path, moving it to `/usr/local/bin/` may do the trick
+2. Set bindings to the commands accordingly to your settup (or with `sxhkd` for for an independent aproach)
+
